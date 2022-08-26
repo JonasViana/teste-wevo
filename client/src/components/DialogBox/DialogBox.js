@@ -1,19 +1,70 @@
-import React, { useState } from "react";
-import Button from "@mui/styled-engine-sc"
-import TextField from "@mui/styled-engine-sc";
-import Dialog from "@mui/styled-engine-sc";
-import DialogActions from "@mui/styled-engine-sc";
-import DialogContent from "@mui/styled-engine-sc";
-import DialogTitle from "@mui/styled-engine-sc";
-import Axios from "axios";
-import produce from "immer";
+import React, { useState } from 'react'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import Axios from 'axios'
 
 export default function FormDialog(props) {
+  const [editValues, setEditValues] = useState({
+    id: props.id,
+    nome: props.nome,
+    cpf: props.cpf,
+    email: props.email,
+    telefone: props.telefone,
+    sexo: props.sexo,
+    dataNascimento: props.dataNascimento
+  })
+
+  const handleChangeValues = value => {
+    setEditValues(prevValues => ({
+      ...prevValues,
+      [value.target.id]: value.target.value
+    }))
+  }
 
   const handleClose = () => {
-    props.setOpen(false);
-  };
+    props.setOpen(false)
+  }
 
+  const handleEditUser = () => {
+    Axios.put('http://localhost:3001/editar', {
+      id: editValues.id,
+      nome: editValues.nome,
+      cpf: editValues.cpf,
+      email: editValues.email,
+      telefone: editValues.telefone,
+      sexo: editValues.sexo,
+      dataNascimento: editValues.dataNascimento
+    }).then(() => {
+      props.setListUser(
+        props.listUser.map(value => {
+          return value.id == editValues.id
+            ? {
+                id: editValues.id,
+                name: editValues.name,
+                cost: editValues.cost,
+                category: editValues.category
+              }
+            : value
+        })
+      )
+    })
+    handleClose()
+  }
+
+  const handleDeleteUser = () => {
+    Axios.delete(`http://localhost:3001/delete/${editValues.id}`).then(() => {
+      props.setListUser(
+        props.listUser.filter(value => {
+          return value.id !== editValues.id
+        })
+      )
+    })
+    handleClose()
+  }
   return (
     <div>
       <Dialog
@@ -27,6 +78,7 @@ export default function FormDialog(props) {
             disabled
             margin="dense"
             id="id"
+            onChange={handleChangeValues}
             label="id"
             defaultValue={props.id}
             type="text"
@@ -35,31 +87,55 @@ export default function FormDialog(props) {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
-            label="Nome do jogo"
-            defaultValue={props.title}
+            id="nome"
+            label="Nome"
+            defaultValue={props.nome}
             type="text"
-        
             fullWidth
           />
           <TextField
             autoFocus
             margin="dense"
-            id="cost"
-            label="preço"
-            defaultValue={props.cost}
-            type="number"
-
+            id="cpf"
+            label="CPF"
+            defaultValue={props.cpf}
+            type="text"
             fullWidth
           />
           <TextField
             autoFocus
             margin="dense"
-            id="category"
-            label="Categoria"
-            defaultValue={props.category}
+            id="email"
+            label="Email"
+            defaultValue={props.email}
             type="text"
-
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="telefone"
+            label="Telefone"
+            defaultValue={props.telefone}
+            type="text"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="sexo"
+            label="Sexo"
+            defaultValue={props.sexo}
+            type="text"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="dataNascimento"
+            label="Data Nascimento"
+            defaultValue={props.dataNascimento}
+            type="text"
             fullWidth
           />
         </DialogContent>
@@ -67,14 +143,14 @@ export default function FormDialog(props) {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button color="primary" >
+          <Button onClick={() => handleDeleteUser()} color="primary">
             Excluir
           </Button>
-          <Button color="primary" >
+          <Button onClick={() => handleEditUser()} color="primary">
             Salvar
           </Button>
         </DialogActions>
       </Dialog>
     </div>
-  );
+  )
 }

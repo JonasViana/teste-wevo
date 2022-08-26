@@ -1,11 +1,10 @@
-.usuario{
-    width: 15vw;
-    height: fit-content;
-    background-color: #3793C9;
-    padding: 1rem;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    border: 2px solid black;
+.usuario {
+  width: 15vw;
+  height: fit-content;
+  background-color: #3793c9;
+  padding: 1rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
