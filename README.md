@@ -16,7 +16,7 @@
 
 1. Crie uma tabela SQL em uma database com o seguinte comando.
 
-CREATE TABLE `teste-wevo`.`teste_wevo` (
+<p>CREATE TABLE `teste-wevo`.`teste_wevo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `cpf` VARCHAR(45) NOT NULL,
@@ -24,8 +24,8 @@ CREATE TABLE `teste-wevo`.`teste_wevo` (
   `telefone` VARCHAR(60) NOT NULL,
   `sexo` VARCHAR(45) NOT NULL,
   `data_nascimento` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`));
-  
+  PRIMARY KEY (`id`));<p/>
+
 2. Insira os valores da sua database no server/index.js
 
 3. $ cd server
