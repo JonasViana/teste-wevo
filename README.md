@@ -16,7 +16,7 @@
 
 1. Crie uma tabela SQL em uma database com o seguinte comando.
 
-<p>CREATE TABLE `teste-wevo`.`teste-wevo` (
+<p>CREATE TABLE `teste-wevo`.`usuarios` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `cpf` VARCHAR(45) NOT NULL,
