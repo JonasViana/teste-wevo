@@ -17,7 +17,7 @@
 
 <p>CREATE SCHEMA `teste-wevo`<p/>
 
-2. Crie uma tabela SQL na database com o seguinte comando.
+2. Crie uma tabela SQL na database criada com o seguinte comando.
 
 <p>CREATE TABLE `teste-wevo`.`usuarios` (
   `id` INT NOT NULL AUTO_INCREMENT,
