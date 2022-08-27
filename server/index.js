@@ -7,7 +7,7 @@ const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '123456',
-  database: 'teste_wevo'
+  database: 'teste-wevo'
 })
 
 app.use(cors())
@@ -22,7 +22,7 @@ app.post('/register', (req, res) => {
   const { dataNascimento } = req.body
 
   let SQL =
-    'INSERT INTO usuarios (Nome, CPF, Email, Telefone, Sexo, DataNascimento) VALUES( ?,?,?,?,?,?)'
+    'INSERT INTO usuarios (nome, cpf, email, telefone, sexo, data_nascimento) VALUES( ?,?,?,?,?,?)'
 
   db.query(
     SQL,
@@ -43,27 +43,20 @@ app.get('/usuarios', (req, res) => {
   })
 })
 
-app.put('/editar', (req, res) => {
-  const { id } = req.body
+app.put("/edit", (req, res) => {
+  const { id } = req.body;
   const { nome } = req.body
   const { cpf } = req.body
   const { email } = req.body
   const { telefone } = req.body
   const { sexo } = req.body
   const { dataNascimento } = req.body
-
-  let SQL =
-    'UPDATE usuarios SET Nome = ?, CPF = ? , Email = ? , Telefone = ? , Sexo = ? , DataNascimento = ? WHERE id = ?'
-
-  db.query(
-    SQL,
-    [nome, cpf, email, telefone, sexo, dataNascimento, id],
-    (err, result) => {
-      if (err) console.log(err)
-      else res.send(result)
-    }
-  )
-})
+  let mysql = "UPDATE usuarios SET nome = ?, cpf = ?, email = ?, telefone = ? , sexo = ?, data_nascimento = ? WHERE id = ?";
+  db.query(mysql, [nome, cpf, email, telefone,sexo, dataNascimento, id], (err, result) => {
+    if (err) console.log(err)
+      else res.send(result) 
+  });
+});
 
 app.delete('/delete/:id', (req, res) => {
   const { id } = req.params

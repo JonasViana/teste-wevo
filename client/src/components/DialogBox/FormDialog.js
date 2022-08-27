@@ -15,7 +15,7 @@ export default function FormDialog(props) {
     email: props.email,
     telefone: props.telefone,
     sexo: props.sexo,
-    dataNascimento: props.dataNascimento
+    dataNascimento: props.dataNascimento,
   })
 
   const handleChangeValues = value => {
@@ -30,7 +30,7 @@ export default function FormDialog(props) {
   }
 
   const handleEditUser = () => {
-    Axios.put('http://localhost:3001/editar', {
+    Axios.put('http://localhost:3001/edit', {
       id: editValues.id,
       nome: editValues.nome,
       cpf: editValues.cpf,
@@ -38,23 +38,10 @@ export default function FormDialog(props) {
       telefone: editValues.telefone,
       sexo: editValues.sexo,
       dataNascimento: editValues.dataNascimento
-    }).then(() => {
-      props.setListUser(
-        props.listUser.map(value => {
-          return value.id == editValues.id
-            ? {
-                id: editValues.id,
-                name: editValues.name,
-                cost: editValues.cost,
-                category: editValues.category
-              }
-            : value
-        })
-      )
     })
     handleClose()
-  }
 
+  }
   const handleDeleteUser = () => {
     Axios.delete(`http://localhost:3001/delete/${editValues.id}`).then(() => {
       props.setListUser(
@@ -65,6 +52,7 @@ export default function FormDialog(props) {
     })
     handleClose()
   }
+
   return (
     <div>
       <Dialog
@@ -88,6 +76,7 @@ export default function FormDialog(props) {
             autoFocus
             margin="dense"
             id="nome"
+            onChange={handleChangeValues}
             label="Nome"
             defaultValue={props.nome}
             type="text"
@@ -97,6 +86,7 @@ export default function FormDialog(props) {
             autoFocus
             margin="dense"
             id="cpf"
+            onChange={handleChangeValues}
             label="CPF"
             defaultValue={props.cpf}
             type="text"
@@ -107,6 +97,7 @@ export default function FormDialog(props) {
             margin="dense"
             id="email"
             label="Email"
+            onChange={handleChangeValues}
             defaultValue={props.email}
             type="text"
             fullWidth
@@ -115,6 +106,7 @@ export default function FormDialog(props) {
             autoFocus
             margin="dense"
             id="telefone"
+            onChange={handleChangeValues}
             label="Telefone"
             defaultValue={props.telefone}
             type="text"
@@ -125,6 +117,7 @@ export default function FormDialog(props) {
             margin="dense"
             id="sexo"
             label="Sexo"
+            onChange={handleChangeValues}
             defaultValue={props.sexo}
             type="text"
             fullWidth
@@ -133,6 +126,7 @@ export default function FormDialog(props) {
             autoFocus
             margin="dense"
             id="dataNascimento"
+            onChange={handleChangeValues}
             label="Data Nascimento"
             defaultValue={props.dataNascimento}
             type="text"

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Axios from 'axios'
-import styles from './PostUsuarios.module.css'
+import { Form } from './styled'
 
 const PostUsuarios = () => {
   const [values, setValues] = useState()
@@ -20,14 +20,12 @@ const PostUsuarios = () => {
       telefone: values.telefone,
       sexo: values.sexo,
       dataNascimento: values.dataNascimento
-    }).then(response => {
-      console.log(response)
     })
   }
 
   return (
-    <div className={styles.form}>
-      <h1>Cadastre um novo usuario</h1>
+      <Form>
+        <h1>Cadastre um novo usuario</h1>
       <label>Nome</label>
       <input
         type="text"
@@ -64,9 +62,9 @@ const PostUsuarios = () => {
         onChange={handleChangeValues}
       />
       <label>Data Nascimento</label>
-      <input type="text" name="dataNascimento" onChange={handleChangeValues} />
+      <input type="text" name="dataNascimento" onChange={handleChangeValues} placeholder='Data de nascimento' />
       <button onClick={() => handleClickButton()}>Cadastrar</button>
-    </div>
+      </Form>
   )
 }
 

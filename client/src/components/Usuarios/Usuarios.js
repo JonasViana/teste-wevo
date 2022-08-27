@@ -1,6 +1,7 @@
-import FormDialog from '../DialogBox/DialogBox'
+import FormDialog from '../DialogBox/FormDialog'
 import { useState } from 'react'
-import styles from './Usuario.module.css'
+import { ContainerUser } from './styled'
+
 
 const Usuarios = props => {
   const [open, setOpen] = useState(false)
@@ -23,17 +24,17 @@ const Usuarios = props => {
         listUser={props.listUser}
         setListUser={props.setListUser}
       />
-      <div className={styles.usuario} onClick={() => handleClickCard()}>
-        <h1>Usuario</h1>
-        <p>Nome:{props.nome}</p>
-        <p>CPF:{props.cpf}</p>
-        <p>Email:{props.email}</p>
-        <p>Telefone:{props.telefone}</p>
-        <p>Sexo:{props.sexo}</p>
-        <p>Data Nascimento:{props.dataNascimento}</p>
-      </div>
+        <ContainerUser onClick={() => handleClickCard()}>
+          <h1>Usuario</h1>
+          <p>Nome: {props.nome}</p>
+          <p>CPF: {props.cpf}</p>
+          <p>Email: {props.email}</p>
+          <p>Telefone: {props.telefone}</p>
+          <p>Sexo: {props.sexo}</p>
+          <p>Data Nascimento: {props.dataNascimento}</p>
+          <button onClick={()=>setOpen(true)}>Editar</button>
+        </ContainerUser>
     </>
   )
 }
-
 export default Usuarios
