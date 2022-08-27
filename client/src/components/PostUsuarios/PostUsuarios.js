@@ -3,7 +3,9 @@ import Axios from 'axios'
 import { Form } from './styled'
 
 const PostUsuarios = () => {
-  const [values, setValues] = useState()
+  const [values, setValues] = useState("")
+
+  const [error, setError] = useState()
 
   const handleChangeValues = value => {
     setValues(prevValue => ({
@@ -12,8 +14,10 @@ const PostUsuarios = () => {
     }))
   }
 
-  const handleClickButton = () => {
-    Axios.post('http://localhost:3001/register', {
+  const handleClickButton = (e) => {
+    if (values.nome === undefined || values.cpf === undefined || values.email === undefined || values.telefone === undefined || values.sexo === undefined || values.dataNascimento === undefined) {
+      setError('Preencha todos os campos !')
+    } else Axios.post('http://localhost:3001/register', {
       nome: values.nome,
       cpf: values.cpf,
       email: values.email,
@@ -21,11 +25,13 @@ const PostUsuarios = () => {
       sexo: values.sexo,
       dataNascimento: values.dataNascimento
     })
-  }
+}
+
 
   return (
-      <Form>
-        <h1>Cadastre um novo usuario</h1>
+    <Form>
+      <h1>Cadastre um novo usuario</h1>
+      {error}
       <label>Nome</label>
       <input
         type="text"
@@ -64,7 +70,7 @@ const PostUsuarios = () => {
       <label>Data Nascimento</label>
       <input type="text" name="dataNascimento" onChange={handleChangeValues} placeholder='Data de nascimento' />
       <button onClick={() => handleClickButton()}>Cadastrar</button>
-      </Form>
+    </Form>
   )
 }
 
