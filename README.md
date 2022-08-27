@@ -13,7 +13,9 @@
 3. $ npm start
 
 ## Server
-1. Crie uma database chamada teste-wevo
+1. Crie uma database chamada teste-wevo com o seguinte comando.
+
+<p>CREATE SCHEMA `teste-wevo`<p/>
 
 2. Crie uma tabela SQL na database com o seguinte comando.
 
