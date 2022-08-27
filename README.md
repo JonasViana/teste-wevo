@@ -1,5 +1,7 @@
 # CRUD NodeJS - MySQL - React
 
+<img src='./client/demonstração.gif'>
+
 ## Instalação
 
 ## Client
